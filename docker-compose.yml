@@ -1,0 +1,29 @@
+version: '3'
+services:
+  account-manager:
+    build: ./account-manager
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./account-manager/.env
+    depends_on:
+      - mongo
+
+  payment-manager:
+    build: ./payment-manager
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./payment-manager/.env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

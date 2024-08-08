@@ -1,0 +1,18 @@
+# Dockerfile for account-manager and payment-manager
+FROM node:16
+
+# Create app directory
+WORKDIR  / account-manager
+
+# Check Node.js version
+RUN node -v
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+CMD [ "node", "src/index.js" ]
